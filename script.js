@@ -1,5 +1,5 @@
-const player1Input = document.getElementById('player-1');
-const player2Input = document.getElementById('player-2');
+const player1Input = document.getElementById('player1');
+const player2Input = document.getElementById('player2');
 const submitBtn = document.getElementById('submit');
 const playerInputDiv = document.querySelector('.player-input');
 const gameDiv = document.querySelector('.game');
@@ -9,7 +9,7 @@ const cells = document.querySelectorAll('.cell');
 let player1 = '';
 let player2 = '';
 let currentPlayer = '';
-let currentSymbol = 'X';
+let currentSymbol = 'x'; // lowercase, as test expects 'x' and 'o'
 let board = Array(9).fill('');
 
 submitBtn.addEventListener('click', () => {
@@ -29,18 +29,17 @@ submitBtn.addEventListener('click', () => {
   messageDiv.textContent = `${currentPlayer}, you're up`;
 });
 
-// Handle cell clicks
 cells.forEach(cell => {
   cell.addEventListener('click', () => {
     const index = parseInt(cell.id) - 1;
 
-    if (board[index] !== '') return; // already filled
+    if (board[index] !== '') return;
 
     board[index] = currentSymbol;
     cell.textContent = currentSymbol;
 
     if (checkWin()) {
-      messageDiv.textContent = `${currentPlayer}, congratulations you won!`;
+      messageDiv.textContent = `${currentPlayer} congratulations you won!`;
       disableBoard();
       return;
     }
@@ -53,10 +52,10 @@ cells.forEach(cell => {
     // Switch turn
     if (currentPlayer === player1) {
       currentPlayer = player2;
-      currentSymbol = 'O';
+      currentSymbol = 'o';
     } else {
       currentPlayer = player1;
-      currentSymbol = 'X';
+      currentSymbol = 'x';
     }
 
     messageDiv.textContent = `${currentPlayer}, you're up`;
